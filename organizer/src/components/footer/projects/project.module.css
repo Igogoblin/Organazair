@@ -1,0 +1,10 @@
+.main {
+  height: 100%;
+  background-color: beige;
+  display: flex;
+  justify-content: space-between;
+}
+.project {
+  width: 50%;
+  border-right: 1px solid gray;
+}
