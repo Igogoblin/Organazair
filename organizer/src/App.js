@@ -1,10 +1,15 @@
 import "./App.css";
 import Footer from "./components/footer/Footer";
+import Projects from "./components/footer/projects/Projects";
 
 function App() {
   return (
     <div className="App">
-      <main></main>
+      <main>
+        <section>
+          <Projects />
+        </section>
+      </main>
       <Footer />
     </div>
   );
