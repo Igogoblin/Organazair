@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import s from "./footer.module.css";
 
 function Footer() {
@@ -7,6 +7,7 @@ function Footer() {
       <p className={s.desc}>
         Проект представляет собой планировщик дел, разбитых по проектам.
       </p>
+
       <div className={s.main}>
         <h3>Description</h3>
         <p>
