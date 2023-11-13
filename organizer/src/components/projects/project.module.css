@@ -8,3 +8,6 @@
   width: 50%;
   border-right: 1px solid gray;
 }
+input {
+  border: none;
+}
