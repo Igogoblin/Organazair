@@ -23,6 +23,7 @@ const projectSlice = createSlice({
         theme: [],
       },
     ],
+    // show: [{ showProject: false }],
   },
   reducers: {
     addProject(state, action) {
@@ -33,8 +34,22 @@ const projectSlice = createSlice({
         theme: [],
       });
     },
+    toggleComplete(state, action) {
+      const toggledProject = state.projects.find(
+        (proj) => proj.id === action.payload.id
+      );
+    },
+    removeProject(state, action) {
+      state.projects.filter((proj) => proj.id !== action.payload.id);
+    },
+    changeProject(state, action) {
+      const changeProd = state.projects.find(
+        (proj) => proj.id === action.payload.id
+      );
+    },
   },
 });
 
-export const { addProject } = projectSlice.actions;
+export const { addProject, toggleComplete, removeProject, changeProject } =
+  projectSlice.actions;
 export default projectSlice.reducer;

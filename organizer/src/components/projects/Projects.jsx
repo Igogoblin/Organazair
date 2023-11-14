@@ -1,18 +1,38 @@
 import React from "react";
 import ProjectList from "./ProjectList";
 import s from "./project.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import NewProjForm from "./NewProjForm";
+import { showProject } from "../../store/showSlice";
 
 function Projects() {
   const projects = useSelector((state) => state.project.projects);
+  const showProj = useSelector((state) => state.showProject.showP);
+  // const showProject = useSelector((state) => state.show.showProjectButton);
+  const dispatch = useDispatch();
   console.log(projects);
+  console.log(showProj[0].showProject);
   return (
     <div className={s.main}>
       <div className={s.project}>
         <h2>this is projects</h2>
-        {projects.map((project) => (
-          <input key={project.id} value={project.text}></input>
-        ))}
+        <ul>
+          {projects.map((project) => (
+            <input key={project.id} value={project.text}></input>
+          ))}
+        </ul>
+
+        <div>
+          {showProj[0].showProject ? (
+            <div>
+              <NewProjForm />
+            </div>
+          ) : (
+            <button onClick={() => dispatch(showProject())}>
+              if need new project
+            </button>
+          )}
+        </div>
       </div>
       <ProjectList />
     </div>
