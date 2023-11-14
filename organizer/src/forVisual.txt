@@ -1,0 +1,19 @@
+function Projects(){
+<ul>
+{
+    map...<Project>
+}
+    
+</ul>
+
+}
+
+
+function Project (){
+
+  <li>
+        <input checkbox />
+        <input />
+        <span><span>
+    </li>  
+}
