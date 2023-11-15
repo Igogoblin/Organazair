@@ -23,7 +23,6 @@ const projectSlice = createSlice({
         theme: [],
       },
     ],
-    // show: [{ showProject: false }],
   },
   reducers: {
     addProject(state, action) {
@@ -35,14 +34,21 @@ const projectSlice = createSlice({
       });
     },
     toggleComplete(state, action) {
+      console.log("work toggleComplete - action: ", action);
       const toggledProject = state.projects.find(
         (proj) => proj.id === action.payload.id
       );
+      toggledProject.completed = !toggledProject.completed;
     },
     removeProject(state, action) {
-      state.projects.filter((proj) => proj.id !== action.payload.id);
+      console.log("this is for delete project, action - ", action);
+      console.log(state.projects);
+      state.projects = state.projects.filter(
+        (proj) => proj.id !== action.payload.id
+      );
     },
     changeProject(state, action) {
+      console.log("when we try change input by project, action - ", action);
       const changeProd = state.projects.find(
         (proj) => proj.id === action.payload.id
       );

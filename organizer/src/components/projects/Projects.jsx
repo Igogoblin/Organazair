@@ -4,6 +4,7 @@ import s from "./project.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import NewProjForm from "./NewProjForm";
 import { showProject } from "../../store/showSlice";
+import ProjectItem from "./ProjectItem";
 
 function Projects() {
   const projects = useSelector((state) => state.project.projects);
@@ -12,13 +13,16 @@ function Projects() {
   const dispatch = useDispatch();
   console.log(projects);
   console.log(showProj[0].showProject);
+  // function forMe(n) {
+  //   console.log(n);
+  // }
   return (
     <div className={s.main}>
       <div className={s.project}>
         <h2>this is projects</h2>
         <ul>
           {projects.map((project) => (
-            <input key={project.id} value={project.text}></input>
+            <ProjectItem key={project.id} {...project} />
           ))}
         </ul>
 
