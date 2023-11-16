@@ -125,9 +125,9 @@ const projectSlice = createSlice({
       console.log("action theme: ", action);
       state.themes.map((theme) => (theme.text = action.payload));
     },
-    // reloadState(state){
-
-    // },
+    reloadState(state) {
+      console.log(" test ");
+    },
   },
 });
 

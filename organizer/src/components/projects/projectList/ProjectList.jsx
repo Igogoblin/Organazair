@@ -9,7 +9,7 @@ function ProjectList() {
   const themes = useSelector((state) => state.project.themes);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
-  console.log("out theme", themes);
+  // console.log("out theme", themes);
   const addThemeText = () => {
     dispatch(addTheme({ text }));
     setText("");
