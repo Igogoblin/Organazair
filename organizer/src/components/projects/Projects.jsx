@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NewProjForm from "./NewProjForm";
 import { hideProject, showProject } from "../../store/showSlice";
 import ProjectItem from "./ProjectItem";
-import { addProject, changeProject } from "../../store/projectSlice";
+import { addProject } from "../../store/projectSlice";
 import ProjectList from "./projectList/ProjectList";
 
 function Projects() {

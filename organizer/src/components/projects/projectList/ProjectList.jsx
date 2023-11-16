@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 function ProjectList() {
   const project = useSelector((state) => state.project.projects);
+
   //   const prod = project.find(checkTheme);
   //   function checkTheme(status) {
   //     if (project.statusShow) return project.theme;
@@ -11,7 +12,7 @@ function ProjectList() {
   //     if (prod.statusShow) return prod.theme;
   //   });
   console.log("our project", project);
-  //   console.log(prod);
+  // console.log(project);
   return (
     <div>
       <h3>this description theme</h3>
