@@ -66,7 +66,7 @@ const projectSlice = createSlice({
       // const changeText = state.projects.find((proj)=>proj.id===action.payload.id);
       // changeText.text= action.payload.text;
       state.projects.map((proj) =>
-        proj.statusShow ? (proj.text = action.payload.text) : ""
+        proj.statusShow ? (proj.text = action.payload) : ""
       );
     },
   },
