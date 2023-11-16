@@ -1,8 +1,14 @@
-function NewProjForm() {
+import React from "react";
+
+function NewProjForm({ text, handleInput, handleSubmit }) {
   return (
     <label>
-      <input placeholder="new project"></input>
-      <button>Add project</button>
+      <input
+        placeholder="new project"
+        value={text}
+        onChange={(e) => handleInput(e.target.value)}
+      ></input>
+      <button onClick={handleSubmit}>Add project</button>
     </label>
   );
 }

@@ -12,7 +12,7 @@ const showSlice = createSlice({
       state.showP[0].showProject = true;
     },
     hideProject(state) {
-      state.showProject = false;
+      state.showP[0].showProject = false;
     },
   },
 });
