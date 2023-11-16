@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 const projectSlice = createSlice({
   name: "project",
@@ -8,7 +9,23 @@ const projectSlice = createSlice({
         id: 1,
         text: "exemple 1",
         completed: false,
-        theme: ["busines 1", "busines 2", "busines 3"],
+        theme: [
+          {
+            id: 11,
+            text: "busines 1",
+            completed: false,
+          },
+          {
+            id: 12,
+            text: "busines 2",
+            completed: false,
+          },
+          {
+            id: 13,
+            text: "busines 3",
+            completed: false,
+          },
+        ],
         statusShow: true,
       },
       {
@@ -26,6 +43,8 @@ const projectSlice = createSlice({
         statusShow: false,
       },
     ],
+    themes: [],
+    indeficator: "",
   },
   reducers: {
     addProject(state, action) {
@@ -52,14 +71,21 @@ const projectSlice = createSlice({
       );
     },
     changeStatus(state, action) {
-      console.log(state);
-      console.log(action);
-      state.projects.map((proj) =>
-        proj.id === action.payload.id
-          ? (proj.statusShow = true)
-          : (proj.statusShow = false)
+      state.projects.map(
+        (proj) => {
+          if (proj.id === action.payload.id) {
+            proj.statusShow = true;
+            state.themes.length = 0;
+            state.themes.push(...proj.theme);
+            state.indeficator = action.payload.id;
+          } else {
+            proj.statusShow = false;
+          }
+        }
+        // proj.id === action.payload.id
+        //   ? (proj.statusShow = true)
+        //   : (proj.statusShow = false)
       );
-      console.log(state);
     },
     changeProject(state, action) {
       console.log("when we try change input by project, action - ", action);
@@ -69,6 +95,39 @@ const projectSlice = createSlice({
         proj.statusShow ? (proj.text = action.payload) : ""
       );
     },
+    // ----------------------------------------------------------------------------------
+    addTheme(state, action) {
+      state.themes.push({
+        id: new Date().toISOString(),
+        text: action.payload.text,
+        completed: false,
+      });
+      // state.projects.map((proj) => {
+      //   if (proj.id === state.indeficator) {
+      //     state.projects;
+      //     proj.theme;
+      //   }
+      // });
+    },
+    toggleCompleteTheme(state, action) {
+      const toggleTheme = state.themes.find(
+        (theme) => theme.id === action.payload.id
+      );
+      toggleTheme.completed = !toggleTheme.completed;
+    },
+    removeTheme(state, action) {
+      state.themes = state.themes.filter(
+        (them) => them.id !== action.payload.id
+      );
+    },
+    changeTheme(state, action) {
+      console.log(state);
+      console.log("action theme: ", action);
+      state.themes.map((theme) => (theme.text = action.payload));
+    },
+    // reloadState(state){
+
+    // },
   },
 });
 
@@ -78,5 +137,9 @@ export const {
   removeProject,
   changeProject,
   changeStatus,
+  addTheme,
+  toggleCompleteTheme,
+  removeTheme,
+  changeTheme,
 } = projectSlice.actions;
 export default projectSlice.reducer;

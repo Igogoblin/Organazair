@@ -12,7 +12,7 @@ function Projects() {
   const projects = useSelector((state) => state.project.projects);
   const showProj = useSelector((state) => state.showProject.showP);
   const [text, setText] = useState("");
-  const [title, setTitle] = useState("");
+  // const [title, setTitle] = useState("");
   // const showProject = useSelector((state) => state.show.showProjectButton);
   const dispatch = useDispatch();
   // console.log(projects);

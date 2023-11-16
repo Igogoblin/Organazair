@@ -8,7 +8,7 @@ import {
 } from "../../store/projectSlice";
 import s from "./project.module.css";
 
-function ProjectItem({ id, text, completed, handleSubmit }) {
+function ProjectItem({ id, text, completed }) {
   const [title, setTitle] = useState(text);
   const dispatch = useDispatch();
 
