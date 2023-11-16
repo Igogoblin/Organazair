@@ -1,26 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   changeProject,
+  changeStatus,
   removeProject,
   toggleComplete,
 } from "../../store/projectSlice";
 import s from "./project.module.css";
 
-function ProjectItem({ id, text, completed }) {
-  console.log(id + " " + text + " ");
+function ProjectItem({ id, text, completed, handleSubmit }) {
+  const [title, setTitle] = useState(text);
   const dispatch = useDispatch();
+
+  function changeProjectText(e) {
+    setTitle(e.target.value);
+    dispatch(changeProject(title));
+  }
   return (
-    <li>
+    <li onClick={() => dispatch(changeStatus({ id }))}>
       <input
         type="checkbox"
         checked={completed}
-        onChange={(e) => dispatch(toggleComplete({ id }))}
+        onChange={() => dispatch(toggleComplete({ id }))}
       />
-      <input
-        onChange={() => dispatch(changeProject({ id }))}
-        value={text}
-      ></input>
+      <input onChange={(e) => changeProjectText(e)} value={title}></input>
       <span
         className={s.forDell}
         onClick={() => dispatch(removeProject({ id }))}
