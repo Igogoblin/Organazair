@@ -1,3 +1,6 @@
+import React from "react";
+import s from "./theme.module.css";
+
 function NewThemeForm({ text, handleInput, handleSubmit }) {
   return (
     <label>
@@ -6,7 +9,9 @@ function NewThemeForm({ text, handleInput, handleSubmit }) {
         value={text}
         onChange={(e) => handleInput(e.target.value)}
       ></input>
-      <button onClick={handleSubmit}>Add theme</button>
+      <button onClick={handleSubmit} className={s.addTheme}>
+        Add theme
+      </button>
     </label>
   );
 }

@@ -9,7 +9,6 @@ function ProjectList() {
   const themes = useSelector((state) => state.project.themes);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
-  // console.log("out theme", themes);
   const addThemeText = () => {
     if (text.length > 0) {
       dispatch(addTheme({ text }));
@@ -18,7 +17,7 @@ function ProjectList() {
   };
   return (
     <div className={s.main}>
-      <h3>this description theme</h3>
+      <h3>project objectives</h3>
       <ul>
         {themes.length > 0 ? (
           themes.map((theme) => (

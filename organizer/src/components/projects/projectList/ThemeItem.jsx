@@ -5,12 +5,12 @@ import {
   removeTheme,
   toggleCompleteTheme,
 } from "../../../store/projectSlice";
+import s from "./theme.module.css";
 
 function ThemeItem({ id, text, completed }) {
   const [title, setTitle] = useState(text);
   const dispatch = useDispatch();
   function changeThemeText(e) {
-    console.log(e.target.value);
     setTitle(e.target.value);
     dispatch(changeTheme(title));
   }
@@ -20,9 +20,13 @@ function ThemeItem({ id, text, completed }) {
         type="checkbox"
         checked={completed}
         onChange={() => dispatch(toggleCompleteTheme({ id }))}
+        className={s.themeComplete}
       ></input>
-      <input onChange={(e) => changeThemeText(e)} value={title}></input>
-      <span onClick={() => dispatch(removeTheme({ id }))}>&times;</span>
+      <textarea onChange={(e) => changeThemeText(e)} value={title}></textarea>
+      <div
+        onClick={() => dispatch(removeTheme({ id }))}
+        className={s.basket}
+      ></div>
     </li>
   );
 }

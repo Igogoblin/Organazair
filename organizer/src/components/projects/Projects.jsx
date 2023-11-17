@@ -12,38 +12,26 @@ function Projects() {
   const projects = useSelector((state) => state.project.projects);
   const showProj = useSelector((state) => state.showProject.showP);
   const [text, setText] = useState("");
-  // const [title, setTitle] = useState("");
-  // const showProject = useSelector((state) => state.show.showProjectButton);
+
   const dispatch = useDispatch();
-  // console.log(projects);
-  // console.log(showProj[0].showProject);
+
   const addTask = () => {
-    console.log(text.length);
     if (text.length > 0) {
       dispatch(addProject({ text }));
       setText("");
-
       dispatch(hideProject());
     } else {
       alert("This field can't be empty");
     }
   };
-  // const changeText = (set) => {
-  //   dispatch(changeProject({ text }));
-  //   set(text);
-  // };
 
   return (
     <div className={s.main}>
       <div className={s.project}>
-        <h2>this is projects</h2>
+        <h2>Projects</h2>
         <ul>
           {projects.map((project) => (
-            <ProjectItem
-              key={project.id}
-              {...project}
-              // handleInput={changeText(setTitle)}
-            />
+            <ProjectItem key={project.id} {...project} />
           ))}
         </ul>
 
@@ -57,7 +45,10 @@ function Projects() {
               />
             </div>
           ) : (
-            <button onClick={() => dispatch(showProject())}>
+            <button
+              onClick={() => dispatch(showProject())}
+              className={s.forNew}
+            >
               if need new project
             </button>
           )}

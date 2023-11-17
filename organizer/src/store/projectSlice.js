@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react-dom/test-utils";
 
 const projectSlice = createSlice({
   name: "project",
@@ -7,22 +6,22 @@ const projectSlice = createSlice({
     projects: [
       {
         id: 1,
-        text: "exemple 1",
+        text: "example 1",
         completed: false,
         theme: [
           {
             id: 11,
-            text: "busines 1",
+            text: "business 1",
             completed: false,
           },
           {
             id: 12,
-            text: "busines 2",
+            text: "business 2",
             completed: false,
           },
           {
             id: 13,
-            text: "busines 3",
+            text: "business 3",
             completed: false,
           },
         ],
@@ -30,7 +29,7 @@ const projectSlice = createSlice({
       },
       {
         id: 2,
-        text: "For exemple two",
+        text: "For example two",
         completed: false,
         theme: [],
         statusShow: false,
@@ -44,7 +43,7 @@ const projectSlice = createSlice({
       },
     ],
     themes: [],
-    indeficator: 1,
+    flag: 1,
   },
   reducers: {
     addProject(state, action) {
@@ -57,40 +56,29 @@ const projectSlice = createSlice({
       });
     },
     toggleComplete(state, action) {
-      // console.log("work toggleComplete - action: ", action);
       const toggledProject = state.projects.find(
         (proj) => proj.id === action.payload.id
       );
       toggledProject.completed = !toggledProject.completed;
     },
     removeProject(state, action) {
-      // console.log("this is for delete project, action - ", action);
-      // console.log(state.projects);
       state.projects = state.projects.filter(
         (proj) => proj.id !== action.payload.id
       );
     },
     changeStatus(state, action) {
-      state.projects.map(
-        (proj) => {
-          if (proj.id === action.payload.id) {
-            proj.statusShow = true;
-            state.themes.length = 0;
-            state.themes.push(...proj.theme);
-            state.indeficator = action.payload.id;
-          } else {
-            proj.statusShow = false;
-          }
+      state.projects.forEach((proj) => {
+        if (proj.id === action.payload.id) {
+          proj.statusShow = true;
+          state.themes.length = 0;
+          state.themes.push(...proj.theme);
+          state.flag = action.payload.id;
+        } else {
+          proj.statusShow = false;
         }
-        // proj.id === action.payload.id
-        //   ? (proj.statusShow = true)
-        //   : (proj.statusShow = false)
-      );
+      });
     },
     changeProject(state, action) {
-      console.log("when we try change input by project, action - ", action);
-      // const changeText = state.projects.find((proj)=>proj.id===action.payload.id);
-      // changeText.text= action.payload.text;
       state.projects.map((proj) =>
         proj.statusShow ? (proj.text = action.payload) : ""
       );
@@ -102,26 +90,20 @@ const projectSlice = createSlice({
         text: action.payload.text,
         completed: false,
       });
-      state.projects.find((proj) => {
-        if (proj.id === state.indeficator) {
+      state.projects.forEach((proj) => {
+        if (proj.id === state.flag) {
           proj.theme.length = 0;
           proj.theme.push(...state.themes);
         }
       });
-      // state.projects.map((proj) => {
-      //   if (proj.id === state.indeficator) {
-      //     state.projects;
-      //     proj.theme;
-      //   }
-      // });
     },
     toggleCompleteTheme(state, action) {
       const toggleTheme = state.themes.find(
         (theme) => theme.id === action.payload.id
       );
       toggleTheme.completed = !toggleTheme.completed;
-      state.projects.find((proj) => {
-        if (proj.id === state.indeficator) {
+      state.projects.forEach((proj) => {
+        if (proj.id === state.flag) {
           proj.theme.length = 0;
           proj.theme.push(...state.themes);
         }
@@ -131,19 +113,17 @@ const projectSlice = createSlice({
       state.themes = state.themes.filter(
         (them) => them.id !== action.payload.id
       );
-      state.projects.find((proj) => {
-        if (proj.id === state.indeficator) {
+      state.projects.forEach((proj) => {
+        if (proj.id === state.flag) {
           proj.theme.length = 0;
           proj.theme.push(...state.themes);
         }
       });
     },
     changeTheme(state, action) {
-      console.log(state);
-      console.log("action theme: ", action);
       state.themes.map((theme) => (theme.text = action.payload));
-      state.projects.find((proj) => {
-        if (proj.id === state.indeficator) {
+      state.projects.forEach((proj) => {
+        if (proj.id === state.flag) {
           proj.theme.length = 0;
           proj.theme.push(...state.themes);
         }
