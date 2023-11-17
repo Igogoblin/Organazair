@@ -18,10 +18,15 @@ function Projects() {
   // console.log(projects);
   // console.log(showProj[0].showProject);
   const addTask = () => {
-    dispatch(addProject({ text }));
-    setText("");
+    console.log(text.length);
+    if (text.length > 0) {
+      dispatch(addProject({ text }));
+      setText("");
 
-    dispatch(hideProject());
+      dispatch(hideProject());
+    } else {
+      alert("This field can't be empty");
+    }
   };
   // const changeText = (set) => {
   //   dispatch(changeProject({ text }));

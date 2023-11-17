@@ -11,8 +11,10 @@ function ProjectList() {
   const [text, setText] = useState("");
   // console.log("out theme", themes);
   const addThemeText = () => {
-    dispatch(addTheme({ text }));
-    setText("");
+    if (text.length > 0) {
+      dispatch(addTheme({ text }));
+      setText("");
+    }
   };
   return (
     <div className={s.main}>

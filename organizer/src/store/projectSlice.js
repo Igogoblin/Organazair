@@ -44,7 +44,7 @@ const projectSlice = createSlice({
       },
     ],
     themes: [],
-    indeficator: "",
+    indeficator: 1,
   },
   reducers: {
     addProject(state, action) {
@@ -102,6 +102,12 @@ const projectSlice = createSlice({
         text: action.payload.text,
         completed: false,
       });
+      state.projects.find((proj) => {
+        if (proj.id === state.indeficator) {
+          proj.theme.length = 0;
+          proj.theme.push(...state.themes);
+        }
+      });
       // state.projects.map((proj) => {
       //   if (proj.id === state.indeficator) {
       //     state.projects;
@@ -114,19 +120,34 @@ const projectSlice = createSlice({
         (theme) => theme.id === action.payload.id
       );
       toggleTheme.completed = !toggleTheme.completed;
+      state.projects.find((proj) => {
+        if (proj.id === state.indeficator) {
+          proj.theme.length = 0;
+          proj.theme.push(...state.themes);
+        }
+      });
     },
     removeTheme(state, action) {
       state.themes = state.themes.filter(
         (them) => them.id !== action.payload.id
       );
+      state.projects.find((proj) => {
+        if (proj.id === state.indeficator) {
+          proj.theme.length = 0;
+          proj.theme.push(...state.themes);
+        }
+      });
     },
     changeTheme(state, action) {
       console.log(state);
       console.log("action theme: ", action);
       state.themes.map((theme) => (theme.text = action.payload));
-    },
-    reloadState(state) {
-      console.log(" test ");
+      state.projects.find((proj) => {
+        if (proj.id === state.indeficator) {
+          proj.theme.length = 0;
+          proj.theme.push(...state.themes);
+        }
+      });
     },
   },
 });

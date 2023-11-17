@@ -10,6 +10,7 @@ function ThemeItem({ id, text, completed }) {
   const [title, setTitle] = useState(text);
   const dispatch = useDispatch();
   function changeThemeText(e) {
+    console.log(e.target.value);
     setTitle(e.target.value);
     dispatch(changeTheme(title));
   }
