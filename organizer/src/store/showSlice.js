@@ -7,8 +7,6 @@ const showSlice = createSlice({
   },
   reducers: {
     showProject(state) {
-      //   console.log(state.showP.showProject);
-      //   console.log(state.showP[0].showProject);
       state.showP[0].showProject = true;
     },
     hideProject(state) {
