@@ -4,18 +4,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* position: relative; */
   overflow: hidden;
 }
 
 main {
   width: 100%;
   height: 100%;
-  background-color: aqua;
   display: flex;
   justify-content: center;
 }
 section {
   width: 80%;
   height: 100%;
+}
+.textarea {
+  display: inline-table;
 }

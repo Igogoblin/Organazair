@@ -1,21 +1,39 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ThemeItem from "./ThemeItem";
+import s from "./theme.module.css";
+import NewThemeForm from "./NewThemeForm";
+import { addTheme } from "../../../store/projectSlice";
 
 function ProjectList() {
-  const project = useSelector((state) => state.project.projects);
-  //   const prod = project.find(checkTheme);
-  //   function checkTheme(status) {
-  //     if (project.statusShow) return project.theme;
-  //   }
-  //   const prod = project.map((prod) => {
-  //     if (prod.statusShow) return prod.theme;
-  //   });
-  console.log("our project", project);
-  //   console.log(prod);
+  const themes = useSelector((state) => state.project.themes);
+  const dispatch = useDispatch();
+  const [text, setText] = useState("");
+  const addThemeText = () => {
+    if (text.length > 0) {
+      dispatch(addTheme({ text }));
+      setText("");
+    }
+  };
   return (
-    <div>
-      <h3>this description theme</h3>
-      {}
+    <div className={s.main}>
+      <h3>project objectives</h3>
+      <ul>
+        {themes.length > 0 ? (
+          themes.map((theme) => (
+            <ThemeItem key={theme.id} {...theme}></ThemeItem>
+          ))
+        ) : (
+          <div>epmty themas</div>
+        )}
+      </ul>
+      <div>
+        <NewThemeForm
+          text={text}
+          handleInput={setText}
+          handleSubmit={addThemeText}
+        />
+      </div>
     </div>
   );
 }

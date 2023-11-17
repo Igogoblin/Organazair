@@ -6,14 +6,30 @@ const projectSlice = createSlice({
     projects: [
       {
         id: 1,
-        text: "exemple 1",
+        text: "example 1",
         completed: false,
-        theme: ["busines 1", "busines 2", "busines 3"],
+        theme: [
+          {
+            id: 11,
+            text: "business 1",
+            completed: false,
+          },
+          {
+            id: 12,
+            text: "business 2",
+            completed: false,
+          },
+          {
+            id: 13,
+            text: "business 3",
+            completed: false,
+          },
+        ],
         statusShow: true,
       },
       {
         id: 2,
-        text: "For exemple two",
+        text: "For example two",
         completed: false,
         theme: [],
         statusShow: false,
@@ -26,6 +42,8 @@ const projectSlice = createSlice({
         statusShow: false,
       },
     ],
+    themes: [],
+    flag: 1,
   },
   reducers: {
     addProject(state, action) {
@@ -38,36 +56,78 @@ const projectSlice = createSlice({
       });
     },
     toggleComplete(state, action) {
-      // console.log("work toggleComplete - action: ", action);
       const toggledProject = state.projects.find(
         (proj) => proj.id === action.payload.id
       );
       toggledProject.completed = !toggledProject.completed;
     },
     removeProject(state, action) {
-      // console.log("this is for delete project, action - ", action);
-      // console.log(state.projects);
       state.projects = state.projects.filter(
         (proj) => proj.id !== action.payload.id
       );
     },
     changeStatus(state, action) {
-      console.log(state);
-      console.log(action);
-      state.projects.map((proj) =>
-        proj.id === action.payload.id
-          ? (proj.statusShow = true)
-          : (proj.statusShow = false)
-      );
-      console.log(state);
+      state.projects.forEach((proj) => {
+        if (proj.id === action.payload.id) {
+          proj.statusShow = true;
+          state.themes.length = 0;
+          state.themes.push(...proj.theme);
+          state.flag = action.payload.id;
+        } else {
+          proj.statusShow = false;
+        }
+      });
     },
     changeProject(state, action) {
-      console.log("when we try change input by project, action - ", action);
-      // const changeText = state.projects.find((proj)=>proj.id===action.payload.id);
-      // changeText.text= action.payload.text;
       state.projects.map((proj) =>
         proj.statusShow ? (proj.text = action.payload) : ""
       );
+    },
+    // ----------------------------------------------------------------------------------
+    addTheme(state, action) {
+      state.themes.push({
+        id: new Date().toISOString(),
+        text: action.payload.text,
+        completed: false,
+      });
+      state.projects.forEach((proj) => {
+        if (proj.id === state.flag) {
+          proj.theme.length = 0;
+          proj.theme.push(...state.themes);
+        }
+      });
+    },
+    toggleCompleteTheme(state, action) {
+      const toggleTheme = state.themes.find(
+        (theme) => theme.id === action.payload.id
+      );
+      toggleTheme.completed = !toggleTheme.completed;
+      state.projects.forEach((proj) => {
+        if (proj.id === state.flag) {
+          proj.theme.length = 0;
+          proj.theme.push(...state.themes);
+        }
+      });
+    },
+    removeTheme(state, action) {
+      state.themes = state.themes.filter(
+        (them) => them.id !== action.payload.id
+      );
+      state.projects.forEach((proj) => {
+        if (proj.id === state.flag) {
+          proj.theme.length = 0;
+          proj.theme.push(...state.themes);
+        }
+      });
+    },
+    changeTheme(state, action) {
+      state.themes.map((theme) => (theme.text = action.payload));
+      state.projects.forEach((proj) => {
+        if (proj.id === state.flag) {
+          proj.theme.length = 0;
+          proj.theme.push(...state.themes);
+        }
+      });
     },
   },
 });
@@ -78,5 +138,9 @@ export const {
   removeProject,
   changeProject,
   changeStatus,
+  addTheme,
+  toggleCompleteTheme,
+  removeTheme,
+  changeTheme,
 } = projectSlice.actions;
 export default projectSlice.reducer;
