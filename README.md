@@ -1,2 +1,0 @@
-# Organazair
-Organazair of Projects 
