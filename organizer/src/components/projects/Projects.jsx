@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { toast } from "react-toastify";
 import s from "./project.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import NewProjForm from "./NewProjForm";
@@ -14,14 +14,20 @@ function Projects() {
   const [text, setText] = useState("");
 
   const dispatch = useDispatch();
-
+  // const options = {
+  //   style: ""
+  // }
   const addTask = () => {
     if (text.length > 0) {
       dispatch(addProject({ text }));
       setText("");
       dispatch(hideProject());
     } else {
-      alert("This field can't be empty");
+      toast.info("This field can't be empty", {
+        position: "top-center",
+        style: {},
+        progressStyle: { background: "red" },
+      });
     }
   };
 

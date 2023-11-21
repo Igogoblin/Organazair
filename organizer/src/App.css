@@ -25,3 +25,6 @@ section {
 .textarea {
   display: inline-table;
 }
+textarea {
+  border-color: aliceblue;
+}
