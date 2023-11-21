@@ -3,45 +3,47 @@ import { createSlice } from "@reduxjs/toolkit";
 const projectSlice = createSlice({
   name: "project",
   initialState: {
-    projects: [
-      {
-        id: 1,
-        text: "example 1",
-        completed: false,
-        theme: [
+    projects: localStorage.getItem("projItem")
+      ? JSON.parse(localStorage.getItem("projItem"))
+      : [
           {
-            id: 11,
-            text: "business 1",
+            id: 1,
+            text: "example 1",
             completed: false,
+            theme: [
+              {
+                id: 11,
+                text: "business 1",
+                completed: false,
+              },
+              {
+                id: 12,
+                text: "business 2",
+                completed: false,
+              },
+              {
+                id: 13,
+                text: "business 3",
+                completed: false,
+              },
+            ],
+            statusShow: true,
           },
           {
-            id: 12,
-            text: "business 2",
+            id: 2,
+            text: "For example two",
             completed: false,
+            theme: [],
+            statusShow: false,
           },
           {
-            id: 13,
-            text: "business 3",
+            id: 3,
+            text: "Project third so-so",
             completed: false,
+            theme: [],
+            statusShow: false,
           },
         ],
-        statusShow: true,
-      },
-      {
-        id: 2,
-        text: "For example two",
-        completed: false,
-        theme: [],
-        statusShow: false,
-      },
-      {
-        id: 3,
-        text: "Project third so-so",
-        completed: false,
-        theme: [],
-        statusShow: false,
-      },
-    ],
     themes: [],
     flag: 1,
   },
@@ -54,17 +56,20 @@ const projectSlice = createSlice({
         theme: [],
         statusShow: false,
       });
+      localStorage.setItem("projItem", JSON.stringify(state.projects));
     },
     toggleComplete(state, action) {
       const toggledProject = state.projects.find(
         (proj) => proj.id === action.payload.id
       );
       toggledProject.completed = !toggledProject.completed;
+      localStorage.setItem("projItem", JSON.stringify(state.projects));
     },
     removeProject(state, action) {
       state.projects = state.projects.filter(
         (proj) => proj.id !== action.payload.id
       );
+      localStorage.setItem("projItem", JSON.stringify(state.projects));
     },
     changeStatus(state, action) {
       state.projects.forEach((proj) => {
@@ -77,11 +82,13 @@ const projectSlice = createSlice({
           proj.statusShow = false;
         }
       });
+      localStorage.setItem("projItem", JSON.stringify(state.projects));
     },
     changeProject(state, action) {
       state.projects.map((proj) =>
         proj.statusShow ? (proj.text = action.payload) : ""
       );
+      localStorage.setItem("projItem", JSON.stringify(state.projects));
     },
     // ----------------------------------------------------------------------------------
     addTheme(state, action) {
@@ -96,6 +103,7 @@ const projectSlice = createSlice({
           proj.theme.push(...state.themes);
         }
       });
+      localStorage.setItem("projItem", JSON.stringify(state.projects));
     },
     toggleCompleteTheme(state, action) {
       const toggleTheme = state.themes.find(
@@ -108,6 +116,7 @@ const projectSlice = createSlice({
           proj.theme.push(...state.themes);
         }
       });
+      localStorage.setItem("projItem", JSON.stringify(state.projects));
     },
     removeTheme(state, action) {
       state.themes = state.themes.filter(
@@ -119,6 +128,7 @@ const projectSlice = createSlice({
           proj.theme.push(...state.themes);
         }
       });
+      localStorage.setItem("projItem", JSON.stringify(state.projects));
     },
     changeTheme(state, action) {
       state.themes.map((theme) => (theme.text = action.payload));
@@ -128,6 +138,7 @@ const projectSlice = createSlice({
           proj.theme.push(...state.themes);
         }
       });
+      localStorage.setItem("projItem", JSON.stringify(state.projects));
     },
   },
 });

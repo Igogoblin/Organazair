@@ -4,6 +4,7 @@ import ThemeItem from "./ThemeItem";
 import s from "./theme.module.css";
 import NewThemeForm from "./NewThemeForm";
 import { addTheme } from "../../../store/projectSlice";
+import { toast } from "react-toastify";
 
 function ProjectList() {
   const themes = useSelector((state) => state.project.themes);
@@ -13,6 +14,9 @@ function ProjectList() {
     if (text.length > 0) {
       dispatch(addTheme({ text }));
       setText("");
+      toast.info("you added new theme", {
+        position: "bottom-center",
+      });
     }
   };
   return (
