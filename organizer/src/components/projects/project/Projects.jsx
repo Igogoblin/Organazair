@@ -3,10 +3,10 @@ import { toast } from "react-toastify";
 import s from "./project.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import NewProjForm from "./NewProjForm";
-import { hideProject, showProject } from "../../store/showSlice";
+import { hideProject, showProject } from "../../../store/showSlice";
 import ProjectItem from "./ProjectItem";
-import { addProject } from "../../store/projectSlice";
-import ProjectList from "./projectList/ProjectList";
+import { addProject } from "../../../store/projectSlice";
+import ProjectList from "../projectList/ProjectList";
 
 function Projects() {
   const projects = useSelector((state) => state.project.projects);
@@ -25,7 +25,7 @@ function Projects() {
     } else {
       toast.info("This field can't be empty", {
         position: "top-center",
-        style: {},
+        // style: {},
         progressStyle: { background: "red" },
       });
     }
