@@ -116,3 +116,16 @@ input[type="checkbox"]:disabled {
   color: var(--form-control-disabled);
   cursor: not-allowed;
 }
+
+textarea:hover {
+  background: #f3ce96;
+  animation: back 2s;
+}
+@keyframes back {
+  50% {
+    background: beige;
+  }
+  100% {
+    background: beige;
+  }
+}
