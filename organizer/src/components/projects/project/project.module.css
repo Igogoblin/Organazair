@@ -36,13 +36,13 @@ li {
   width: 1.2em;
   border: none;
   cursor: pointer;
-  background-image: url("../../assets/free-icon-delete-button-5676066.png");
+  background-image: url("../../../assets/free-icon-delete-button-5676066.png");
   background-repeat: no-repeat;
   background-position: start;
 }
 
 .forDell:hover {
-  background-image: url("../../assets/free-icon-delete-button-5680126.png");
+  background-image: url("../../../assets/free-icon-delete-button-5680126.png");
   transform: scale(1.2);
 }
 

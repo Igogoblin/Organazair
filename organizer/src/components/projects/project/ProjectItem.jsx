@@ -5,7 +5,7 @@ import {
   changeStatus,
   removeProject,
   toggleComplete,
-} from "../../store/projectSlice";
+} from "../../../store/projectSlice";
 import s from "./project.module.css";
 
 function ProjectItem({ id, text, completed }) {
