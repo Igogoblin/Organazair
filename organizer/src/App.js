@@ -11,7 +11,6 @@ function App() {
           <Projects />
         </section>
       </main>
-      {/* <Footer /> */}
     </div>
   );
 }
